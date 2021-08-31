@@ -17,15 +17,20 @@ exchange.addEventListener("click", () => {
 })
 
 function calculate() {
+  // console.log("im working")
   const from_currency = from_currencyE1.value;
   const to_currency = to_currencyE1.value;
 
-  fetch(`https://v6.exchangerate-api.com/v6/2c99a8699ea0ff2ff89996a3/latest/USD`)
+  fetch(`https://v6.exchangerate-api.com/v6/2c99a8699ea0ff2ff89996a3/latest/${from_currencyE1.value.toUpperCase()}`)
     .then(res => res.json())
     .then(res => {
-      const rate = res.rates[to_currency];
-      rateE1.innerText = `1 ${from_currency} = ${rate} ${to_currency}`
-      to_amountE1.value = (from_amountE1.value * rate).toFixed(2);
+      const to = to_currencyE1.value.toUpperCase();
+      const rate = res.conversion_rates[to];
+
+      console.log(rate)
+      // rateE1.innerText = `1 ${from_currency} = ${rate} ${to_currency}`
+      // to_amountE1.value = (from_amountE1.value * rate).toFixed(2);
+
     })
 }
 
